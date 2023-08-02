@@ -23,7 +23,7 @@ mystr2  DW 0XAAAA
 init:   MOV     #SFE(CSTACK), SP      	    ; set up stack
 main:   NOP                             		; main program
         MOV.W   #WDTPW+WDTHOLD, &WDTCTL     ; Stop watchdog timer
-CLR.W   R5
+        CLR.W   R5
         MOV.W   #0x0000,R5        
 L1:     MOV.W   0x3010(R5),R6
         MOV.W   0x3020(R5),R7   
