@@ -1,0 +1,28 @@
+#include "msp430.h" 
+ORG 0x3010
+mystr DW 0x1234
+ NAME main 
+ PUBLIC main  
+ ORG 0FFFEh
+ DC16 init  
+ RSEG CSTACK  
+ RSEG CODE  
+init: MOV #SFE(CSTACK), SP  
+main: NOP 
+ MOV.W #WDTPW+WDTHOLD, & WDTCTL  
+ CLR R5
+ MOV.W 0X3010(R5), R4
+ MOV.W R4 , R8
+ mov.w R4 , R7
+ CLR R6
+ SUB.W #0001, R8
+L1: ADD.W R7, R4
+ JNC L2
+ INC R6
+L2: DEC R8
+ JNZ L1
+ MOV.W R6, 0X3020(R5)  
+ INCD R5 
+ MOV.W R4, 0X3020(R5)  
+ JMP $  
+ END
